@@ -79,7 +79,7 @@ processResources
 }
 
 static def generateVersionCode() {
-    def result = "git rev-list HEAD --count".execute().text.trim() //unix
+    def result = "git rev-list 68b2f1c29aa3c5f27992437bf6db821958890077..HEAD --count".execute().text.trim() //unix
     if(result.empty) result = "PowerShell -Command git rev-list HEAD --count".execute().text.trim() //windows
     if(result.empty) throw new RuntimeException("Could not generate versioncode on this platform? Cmd output: ${result.text}")
     return result.toInteger()
