@@ -16,7 +16,7 @@ script:
 
 deploy:
   provider: bintray
-  file: $HOME/build/bintray_descriptor.json
+  file: build/bintray_descriptor.json
   user: $BINTRAY_USER
   key: $BINTRAY_API_KEY
   skip_cleanup: true # to upload artifacts created during the build
