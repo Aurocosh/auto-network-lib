@@ -17,6 +17,7 @@ buildscript {
 
 plugins {
     id "com.jfrog.bintray" version "1.8.4"
+    id 'com.matthewprenger.cursegradle' version '1.2.0'
 //    id "com.jfrog.bintray" version "1.7"
 }
 
@@ -24,6 +25,7 @@ apply plugin: 'maven'
 apply plugin: 'maven-publish'
 apply plugin: 'java'
 apply plugin: 'net.minecraftforge.gradle.forge'
+
 
 
 //plugins {
@@ -140,5 +142,14 @@ bintray {
             desc = 'Auto message lib'
             vcsTag = project.version
         }
+    }
+}
+
+curseforge {
+    apiKey = '147e8168-8037-4d1a-bbf0-a61aea25d14b' // This should really be in a gradle.properties file
+    project {
+        id = '323346'
+        changelog = 'Changes' // A file can also be set using: changelog = file('changelog.txt')
+        releaseType = 'beta'
     }
 }
