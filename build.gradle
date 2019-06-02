@@ -117,3 +117,11 @@ bintray {
         }
     }
 }
+
+task generateBintrayDescriptor(type: Copy) {
+    from './'
+    into "$buildDir"
+    include 'bintray_descriptor.json.template'
+    rename { file -> 'bintray_descriptor.json' }
+    expand(version: mod_version)
+}
