@@ -1,4 +1,6 @@
 language: java
+jdk: oraclejdk8
+sudo: false
 
 before_install: chmod +x gradlew
 install: ./gradlew setupDecompWorkspace
@@ -13,6 +15,8 @@ cache:
 
 script:
   - ./gradlew build generateBintrayDescriptor
+  - ls ./
+  - ls ./build
 
 deploy:
   provider: bintray
