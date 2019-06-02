@@ -131,13 +131,13 @@ bintray {
         repo = 'Maven'
         name = 'auto-message-lib'
         licenses = ['LGPL-3.0']
-        vcsUrl = 'https://github.com/Aurocosh/auto-message-lib.git'
-        issueTrackerUrl = 'https://github.com/Aurocosh/auto-message-lib/issues'
+        vcsUrl = 'https://github.com/Aurocosh/auto-network-lib.git'
+        issueTrackerUrl = 'https://github.com/Aurocosh/auto-network-lib/issues'
         publish = true
         publicDownloadNumbers = true
         version {
-            name = 'AutoMessageLib-' + project.version
-            desc = 'Auto message lib'
+            name = 'AutoNetworkLib-' + project.version
+            desc = 'Auto network lib'
             vcsTag = project.version
         }
     }

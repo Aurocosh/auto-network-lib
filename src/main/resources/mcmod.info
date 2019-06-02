@@ -1,7 +1,7 @@
 [
 {
-  "modid": "automessagelib",
-  "name": "Auto Message Lib",
+  "modid": "autonetworklib",
+  "name": "Auto Network Lib",
   "description": "Automatic serialization library for network messages",
   "version": "${version}",
   "mcversion": "${mcversion}",
