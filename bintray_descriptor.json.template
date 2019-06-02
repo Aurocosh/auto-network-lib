@@ -1,0 +1,19 @@
+{
+    "package": {
+        "name": "auto-message-lib",
+        "repo": "Test",
+        "issue_tracker_url": "https://github.com/Aurocosh/auto-message-lib/issues",
+        "vcs_url": "https://github.com/Aurocosh/auto-message-lib.git",,
+        "licenses": ["LGPL-3.0"],
+        "public_download_numbers": true,
+        "public_stats": false
+    },
+
+    "version": {
+        "name": "AutoMessageLib-${version}",
+        "desc": "Auto message lib",
+        "vcs_tag": "${version}"
+    },
+	
+    "publish": true
+}
