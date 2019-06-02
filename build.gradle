@@ -16,7 +16,8 @@ buildscript {
 }
 
 plugins {
-    id "com.jfrog.bintray" version "1.7"
+    id "com.jfrog.bintray" version "1.8.4"
+//    id "com.jfrog.bintray" version "1.7"
 }
 
 apply plugin: 'maven'
@@ -131,6 +132,7 @@ bintray {
         name = 'auto-message-lib'
         licenses = ['LGPL-3.0']
         vcsUrl = 'https://github.com/Aurocosh/auto-message-lib.git'
+        publish = true
         publicDownloadNumbers = true
         version {
             name = 'AutoMessageLib-' + project.version
