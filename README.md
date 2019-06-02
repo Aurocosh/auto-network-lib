@@ -1,4 +1,4 @@
-# Divine favor
-Magical mod centered around spiritual magic and spell casting
+# Auto Network Lib
+Network message serialization library
 
-Curse Forge: [Project page](https://minecraft.curseforge.com/projects/divine-favor)
+Curse Forge: [Project page](https://minecraft.curseforge.com/projects/auto-network-lib)
