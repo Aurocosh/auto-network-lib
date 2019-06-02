@@ -18,13 +18,7 @@ script:
   - ls ./build
 
 deploy:
-  provider: bintray
-  file: build/bintray_descriptor.json
-  user: $BINTRAY_USER
-  key: $BINTRAY_API_KEY
-  skip_cleanup: true # to upload artifacts created during the build
-
-provider: script
+  provider: script
   script: ./gradlew bintrayUpload
   on:
     branch: master
