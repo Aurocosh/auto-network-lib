@@ -89,13 +89,36 @@ jar {
 
 }
 
+
+task deobfJar(type: Jar) {
+    from(sourceSets.main.output)
+    archiveName = "${baseName}-${version}-deobf.${extension}"
+}
+
+task srcJar(type: Jar) {
+    from(sourceSets.main.java)
+    classifier = 'sources'
+    archiveName = "${baseName}-${version}-sources.${extension}"
+}
+
+artifacts {
+    archives deobfJar, srcJar
+}
+
 publishing {
     publications {
-        MyPublication(MavenPublication) {
+        maven(MavenPublication) {
             from components.java
-            groupId 'org.jfrog.example.gradle'
-            artifactId 'auto-message-lib'
-            version = mod_version
+            groupId project.group
+            artifactId project.archivesBaseName
+            version project.version
+
+            artifact deobfJar {
+                classifier 'deobf'
+            }
+            artifact srcJar {
+                classifier 'sources'
+            }
         }
     }
 }
@@ -103,7 +126,7 @@ publishing {
 bintray {
     user = System.getenv('BINTRAY_USER')
     key = System.getenv('BINTRAY_API_KEY')
-    publications = ['MyPublication']
+    publications = ['maven']
     pkg {
         repo = 'Test'
         name = 'auto-message-lib'
