@@ -14,8 +14,7 @@ cache:
     - $HOME/.gradle/wrapper/
 
 script:
-  - ./gradlew build generateBintrayDescriptor
-  - ls ./
+  - ./gradlew build
   - ls ./build
 
 deploy:
@@ -24,3 +23,8 @@ deploy:
   user: $BINTRAY_USER
   key: $BINTRAY_API_KEY
   skip_cleanup: true # to upload artifacts created during the build
+
+provider: script
+  script: ./gradlew bintrayUpload
+  on:
+    branch: master

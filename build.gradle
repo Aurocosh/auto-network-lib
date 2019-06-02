@@ -89,7 +89,6 @@ jar {
 
 }
 
-
 task deobfJar(type: Jar) {
     from(sourceSets.main.output)
     archiveName = "${baseName}-${version}-deobf.${extension}"
@@ -134,17 +133,9 @@ bintray {
         vcsUrl = 'https://github.com/Aurocosh/auto-message-lib.git'
         publicDownloadNumbers = true
         version {
-            name = 'AutoMessageLib-' + mod_version
+            name = 'AutoMessageLib-' + project.version
             desc = 'Auto message lib'
-            vcsTag = mod_version
+            vcsTag = project.version
         }
     }
-}
-
-task generateBintrayDescriptor(type: Copy) {
-    from './'
-    into "$buildDir"
-    include 'bintray_descriptor.json.template'
-    rename { file -> 'bintray_descriptor.json' }
-    expand(version: mod_version)
 }
