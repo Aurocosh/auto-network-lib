@@ -15,14 +15,26 @@ buildscript {
     }
 }
 
+plugins {
+    id "com.jfrog.bintray" version "1.7"
+}
+
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+apply plugin: 'java'
 apply plugin: 'net.minecraftforge.gradle.forge'
+
+
+//plugins {
+//    id "com.jfrog.bintray" version "1.7"
+//}
 
 repositories {
     mavenCentral()
 }
 
 //logging.level = LogLevel.DEBUG
-mod_version = "${mod_version}.${generateVersionCode()}"
+mod_version = "${mod_version}.${generateVersionCode()}".toString()
 version = mod_version
 //println version
 
@@ -75,4 +87,33 @@ static def generateVersionCode() {
 
 jar {
 
+}
+
+publishing {
+    publications {
+        MyPublication(MavenPublication) {
+            from components.java
+            groupId 'org.jfrog.example.gradle'
+            artifactId 'auto-message-lib'
+            version = mod_version
+        }
+    }
+}
+
+bintray {
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_API_KEY')
+    publications = ['MyPublication']
+    pkg {
+        repo = 'Test'
+        name = 'auto-message-lib'
+        licenses = ['LGPL-3.0']
+        vcsUrl = 'https://github.com/Aurocosh/auto-message-lib.git'
+        publicDownloadNumbers = true
+        version {
+            name = 'AutoMessageLib-' + mod_version
+            desc = 'Auto message lib'
+            vcsTag = mod_version
+        }
+    }
 }
