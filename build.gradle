@@ -18,19 +18,12 @@ buildscript {
 plugins {
     id "com.jfrog.bintray" version "1.8.4"
     id 'com.matthewprenger.cursegradle' version '1.2.0'
-//    id "com.jfrog.bintray" version "1.7"
 }
 
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
 apply plugin: 'java'
 apply plugin: 'net.minecraftforge.gradle.forge'
-
-
-
-//plugins {
-//    id "com.jfrog.bintray" version "1.7"
-//}
 
 repositories {
     mavenCentral()
@@ -83,9 +76,14 @@ processResources
 
 static def generateVersionCode() {
     def result = "git rev-list 68b2f1c29aa3c5f27992437bf6db821958890077..HEAD --count".execute().text.trim() //unix
-    if(result.empty) result = "PowerShell -Command git rev-list HEAD --count".execute().text.trim() //windows
     if(result.empty) throw new RuntimeException("Could not generate versioncode on this platform? Cmd output: ${result.text}")
     return result.toInteger()
+}
+
+static def getLastCommitMessage() {
+    def result = "git log --format=%B -n 1 HEAD".execute().text.trim() //unix
+    if(result.empty) throw new RuntimeException("Could not get last commit message? Cmd output: ${result.text}")
+    return result
 }
 
 jar {
@@ -146,10 +144,10 @@ bintray {
 }
 
 curseforge {
-    apiKey = '147e8168-8037-4d1a-bbf0-a61aea25d14b' // This should really be in a gradle.properties file
+    apiKey = System.getenv('CURSEFORGE_API_KEY') ? System.getenv('CURSEFORGE_API_KEY') : ''
     project {
         id = '323346'
-        changelog = 'Changes' // A file can also be set using: changelog = file('changelog.txt')
+        changelog = getLastCommitMessage()
         releaseType = 'beta'
     }
 }

@@ -1,8 +1,8 @@
 [
 {
-  "modid": "divinefavor",
-  "name": "Divine Favor",
-  "description": "Divine Favor",
+  "modid": "automessagelib",
+  "name": "Auto Message Lib",
+  "description": "Automatic serialization library for network messages",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
