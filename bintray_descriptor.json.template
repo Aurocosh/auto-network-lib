@@ -17,7 +17,7 @@
     },
 	"files":
         [
-        {"includePattern": "build/libs(.*).jar",  "uploadPattern": "./$1.jar"},
+        {"includePattern": "build/libs(.*).jar",  "uploadPattern": "./\$1.jar"},
         {"includePattern": "build/publications/maven/pom-default.xml", "uploadPattern": "./automessagelib-${version}"}
         ],
 	
