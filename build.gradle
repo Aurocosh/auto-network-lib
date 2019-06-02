@@ -128,10 +128,11 @@ bintray {
     key = System.getenv('BINTRAY_API_KEY')
     publications = ['maven']
     pkg {
-        repo = 'Test'
+        repo = 'Maven'
         name = 'auto-message-lib'
         licenses = ['LGPL-3.0']
         vcsUrl = 'https://github.com/Aurocosh/auto-message-lib.git'
+        issueTrackerUrl = 'https://github.com/Aurocosh/auto-message-lib/issues'
         publish = true
         publicDownloadNumbers = true
         version {
