@@ -1,7 +1,0 @@
-{
-    "parent": "item/generated",
-    "textures": {		
-        "layer1": "divinefavor:items/talismans/arrow_deflection",
-        "layer0": "divinefavor:items/talismans/base"
-    }
-}

@@ -1,7 +1,0 @@
-{
-    "parent": "item/generated",
-    "textures": {
-        "layer1": "divinefavor:items/symbols/romol",
-        "layer0": "divinefavor:items/favor_marks/romol"
-    }
-}

@@ -1,7 +1,0 @@
-{
-    "parent": "item/generated",
-    "textures": {		
-        "layer1": "divinefavor:items/talismans/sense/ore_vague",
-        "layer0": "divinefavor:items/talismans/base"
-    }
-}

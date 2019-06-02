@@ -1,7 +1,0 @@
-{
-    "parent": "item/generated",
-    "textures": {
-        "layer1": "divinefavor:items/contracts/capacity_minor",
-        "layer0": "divinefavor:items/contracts/base/green"
-    }
-}
