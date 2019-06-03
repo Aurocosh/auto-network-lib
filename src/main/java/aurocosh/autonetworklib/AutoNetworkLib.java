@@ -11,13 +11,12 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = AutoNetworkLib.MOD_ID, name = AutoNetworkLib.MOD_NAME, version = AutoNetworkLib.VERSION, dependencies = AutoNetworkLib.DEPS,acceptedMinecraftVersions = AutoNetworkLib.MC_VERSIONS)
+@Mod(modid = AutoNetworkLib.MOD_ID, name = AutoNetworkLib.MOD_NAME, version = AutoNetworkLib.VERSION, dependencies = AutoNetworkLib.DEPS)
 public class AutoNetworkLib {
     // Mod Constants
     public final static String MOD_ID = "autonetworklib";
     public final static String MOD_NAME = "AutoNetworkLib";
     public final static String VERSION = "GRADLE:VERSION";
-    public final static String MC_VERSIONS = "[1.12.2]";
     public static final String DEPS = "required-after:forge@[14.23.5.2768,)";
 
     // Proxy Constants
