@@ -30,12 +30,11 @@ repositories {
 }
 
 //logging.level = LogLevel.DEBUG
-mod_version = "${mod_version}.${generateVersionCode()}".toString()
-version = mod_version
+version = "${mod_version}.${generateVersionCode()}"
 //println version
 
 group = mod_group
-archivesBaseName = mod_archivesBaseName
+archivesBaseName = "${mod_archives_base_name}-${mc_sub_version}"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -136,9 +135,9 @@ bintray {
         publish = true
         publicDownloadNumbers = true
         version {
-            name = 'AutoNetworkLib-' + project.version
+            name = "AutoNetworkLib-${project.minecraft.version}-${project.version}"
             desc = 'Auto network lib'
-            vcsTag = project.version
+            vcsTag = "${project.minecraft.version}-${project.version}"
         }
     }
 }
