@@ -144,8 +144,8 @@ bintray {
 curseforge {
     apiKey = System.getenv('CURSEFORGE_API_KEY') ? System.getenv('CURSEFORGE_API_KEY') : ''
     project {
-        id = '323353'
+        id = curse_project_id
         changelog = getLastCommitMessage()
-        releaseType = 'beta'
+        releaseType = curse_release_type
     }
 }

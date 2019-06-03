@@ -5,10 +5,10 @@
   "description": "Automatic serialization library for network messages",
   "version": "${version}",
   "mcversion": "${mcversion}",
-  "url": "",
+  "url": "https://minecraft.curseforge.com/projects/auto-network-lib",
   "updateUrl": "",
   "authorList": ["Aurocosh"],
-  "credits": "Aurocosh",
+  "credits": "",
   "logoFile": "",
   "screenshots": []
 }
