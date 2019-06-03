@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = ConstMisc.MOD_ID, name = ConstMisc.MOD_NAME, version = ConstMisc.VERSION, dependencies = "required-after:forge@[14.23.5.2768,)")
+@Mod(modid = ConstMisc.MOD_ID, name = ConstMisc.MOD_NAME, dependencies = "required-after:forge@[14.23.5.2768,)")
 public class AutoNetworkLib {
 	@Instance(ConstMisc.MOD_ID)
 	public static AutoNetworkLib instance;

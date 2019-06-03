@@ -1,6 +1,6 @@
 package aurocosh.autonetworklib.proxy;
 
-import aurocosh.autonetworklib.network.base.serialization.serializer_provider.BufSerializerProvider;
+import aurocosh.autonetworklib.network.serialization.serializer_provider.BufSerializerProvider;
 import com.google.common.util.concurrent.ListenableFuture;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;

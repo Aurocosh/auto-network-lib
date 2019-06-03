@@ -6,7 +6,6 @@ import net.minecraftforge.fml.relauncher.Side;
 
 public class AutoNetworkWrapper {
     private int nextId;
-
     private final SimpleNetworkWrapper wrapper;
 
     public AutoNetworkWrapper(String modId) {
