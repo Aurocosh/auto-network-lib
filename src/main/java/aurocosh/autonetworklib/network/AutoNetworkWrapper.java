@@ -6,11 +6,16 @@ import net.minecraftforge.fml.relauncher.Side;
 
 public class AutoNetworkWrapper {
     private int nextId;
+
     private final SimpleNetworkWrapper wrapper;
 
     public AutoNetworkWrapper(String modId) {
         nextId = 0;
         wrapper = NetworkRegistry.INSTANCE.newSimpleChannel(modId);
+    }
+
+    public SimpleNetworkWrapper getWrapper() {
+        return wrapper;
     }
 
     public void register(Class clazz, Side handlerSide) {
