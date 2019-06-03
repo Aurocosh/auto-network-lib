@@ -43,11 +43,10 @@ minecraft {
     version = "${mc_sub_version}-${forge_version}"
     runDir = "run"
     mappings = mc_mappings
-    useDepAts = true
 //    makeObfSourceJar = false
 
-    replace 'GRADLE.BUILD', '1'
-    replace 'GRADLE.VERSION', mod_version
+    replaceIn "AutoNetworkLib.java"
+    replace 'GRADLE:VERSION', project.version
 }
 
 dependencies {

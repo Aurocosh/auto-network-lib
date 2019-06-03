@@ -1,6 +1,6 @@
 package aurocosh.autonetworklib.network.serialization.serializer_provider.registration;
 
-import aurocosh.autonetworklib.constants.ConstMisc;
+import aurocosh.autonetworklib.AutoNetworkLib;
 import aurocosh.autonetworklib.network.serialization.buf_serializers.Color3fSerializer;
 import aurocosh.autonetworklib.network.serialization.buf_serializers.Vec3dSerializer;
 import aurocosh.autonetworklib.network.serialization.interfaces.BufWriter;
@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 
 import javax.vecmath.Color3f;
 
-@Mod.EventBusSubscriber(modid = ConstMisc.MOD_ID)
+@Mod.EventBusSubscriber(modid = AutoNetworkLib.MOD_ID)
 public class NormalBufSerializerRegistration {
     @SubscribeEvent
     public static void onRegisterSerializers(BufSerializerRegistryEvent event) {

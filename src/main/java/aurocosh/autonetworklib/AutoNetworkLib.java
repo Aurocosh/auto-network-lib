@@ -1,6 +1,5 @@
 package aurocosh.autonetworklib;
 
-import aurocosh.autonetworklib.constants.ConstMisc;
 import aurocosh.autonetworklib.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -12,12 +11,23 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = ConstMisc.MOD_ID, name = ConstMisc.MOD_NAME, dependencies = "required-after:forge@[14.23.5.2768,)")
+@Mod(modid = AutoNetworkLib.MOD_ID, name = AutoNetworkLib.MOD_NAME, version = AutoNetworkLib.VERSION, dependencies = AutoNetworkLib.DEPS,acceptedMinecraftVersions = AutoNetworkLib.MC_VERSIONS)
 public class AutoNetworkLib {
-	@Instance(ConstMisc.MOD_ID)
+    // Mod Constants
+    public final static String MOD_ID = "autonetworklib";
+    public final static String MOD_NAME = "AutoNetworkLib";
+    public final static String VERSION = "GRADLE:VERSION";
+    public final static String MC_VERSIONS = "[1.12.2]";
+    public static final String DEPS = "required-after:forge@[14.23.5.2768,)";
+
+    // Proxy Constants
+    public final static String PROXY_COMMON = "aurocosh.autonetworklib.proxy.CommonProxy";
+    public final static String PROXY_CLIENT = "aurocosh.autonetworklib.proxy.ClientProxy";
+
+	@Instance(AutoNetworkLib.MOD_ID)
 	public static AutoNetworkLib instance;
 
-	@SidedProxy(serverSide = ConstMisc.PROXY_COMMON, clientSide = ConstMisc.PROXY_CLIENT)
+	@SidedProxy(serverSide = AutoNetworkLib.PROXY_COMMON, clientSide = AutoNetworkLib.PROXY_CLIENT)
 	public static CommonProxy proxy;
     public static Logger logger;
 

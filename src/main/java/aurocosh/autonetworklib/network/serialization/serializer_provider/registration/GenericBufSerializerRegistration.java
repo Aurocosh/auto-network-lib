@@ -1,6 +1,6 @@
 package aurocosh.autonetworklib.network.serialization.serializer_provider.registration;
 
-import aurocosh.autonetworklib.constants.ConstMisc;
+import aurocosh.autonetworklib.AutoNetworkLib;
 import aurocosh.autonetworklib.network.serialization.buf_serializers.generic.array_list.CollectionSerializerProvider;
 import aurocosh.autonetworklib.network.serialization.buf_serializers.generic.hash_set.MapSerializerProvider;
 import aurocosh.autonetworklib.network.serialization.serializer_provider.BufSerializerProvider;
@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.*;
 
-@Mod.EventBusSubscriber(modid = ConstMisc.MOD_ID)
+@Mod.EventBusSubscriber(modid = AutoNetworkLib.MOD_ID)
 public class GenericBufSerializerRegistration {
     @SubscribeEvent
     public static void onRegisterSerializers(BufSerializerRegistryEvent event) {
