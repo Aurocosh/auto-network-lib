@@ -129,7 +129,7 @@ bintray {
     publications = ['maven']
     pkg {
         repo = 'Maven'
-        name = 'auto-network-lib'
+        name = 'AutoNetworkLib'
         licenses = ['LGPL-3.0']
         vcsUrl = 'https://github.com/Aurocosh/auto-network-lib.git'
         issueTrackerUrl = 'https://github.com/Aurocosh/auto-network-lib/issues'
