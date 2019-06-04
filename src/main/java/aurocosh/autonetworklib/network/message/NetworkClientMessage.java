@@ -7,9 +7,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class NetworkClientMessage extends NetworkAutoMessage {
-    public NetworkClientMessage() {
-    }
-
     @Override
     @SideOnly(Side.CLIENT)
     public final IMessage handleMessage(MessageContext context) {

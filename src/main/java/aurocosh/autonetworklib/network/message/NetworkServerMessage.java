@@ -5,9 +5,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public abstract class NetworkServerMessage extends NetworkAutoMessage {
-    public NetworkServerMessage() {
-    }
-
     @Override
     public final IMessage handleMessage(MessageContext context) {
         EntityPlayerMP serverPlayer = context.getServerHandler().player;

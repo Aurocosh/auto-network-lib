@@ -41,12 +41,13 @@ public class UtilReflection {
 
     public static List<Field> getFields(@Nonnull Class type, Predicate<Field> predicate) {
         List<Field> result = new ArrayList<>();
-        while (type != null) {
-            Field[] fields = type.getDeclaredFields();
+        Class clazz = type;
+        while (clazz != null) {
+            Field[] fields = clazz.getDeclaredFields();
             for (Field field : fields)
                 if (predicate.test(field))
                     result.add(field);
-            type = type.getSuperclass();
+            clazz = clazz.getSuperclass();
         }
         return result;
     }

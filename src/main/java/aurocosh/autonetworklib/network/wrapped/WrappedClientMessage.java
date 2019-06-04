@@ -10,9 +10,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 public abstract class WrappedClientMessage extends NetworkClientMessage implements IWrapperProvider {
-    public WrappedClientMessage() {
-    }
-
     public void sendTo(EntityPlayer player) {
         if (player instanceof EntityPlayerMP)
             getWrapper().sendTo(this, (EntityPlayerMP) player);

@@ -31,7 +31,7 @@ repositories {
 
 //logging.level = LogLevel.DEBUG
 version = "${mod_version}.${generateVersionCode()}"
-//println version
+println version
 
 group = mod_group
 archivesBaseName = "${mod_archives_base_name}-${mc_sub_version}"
@@ -44,9 +44,6 @@ minecraft {
     runDir = "run"
     mappings = mc_mappings
 //    makeObfSourceJar = false
-
-    replaceIn "AutoNetworkLib.java"
-    replace 'GRADLE:VERSION', project.version
 }
 
 dependencies {

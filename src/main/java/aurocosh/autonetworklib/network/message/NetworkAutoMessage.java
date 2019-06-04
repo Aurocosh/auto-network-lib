@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import java.util.HashMap;
 
-public abstract class NetworkAutoMessage<REQ extends NetworkAutoMessage> implements IMessage, IMessageHandler<REQ, IMessage> {
+public abstract class NetworkAutoMessage<T extends NetworkAutoMessage> implements IMessage, IMessageHandler<T, IMessage> {
     private static final HashMap<Class, ClassBufSerializer> serializers = new HashMap<>();
 
     @Override
@@ -26,7 +26,7 @@ public abstract class NetworkAutoMessage<REQ extends NetworkAutoMessage> impleme
     }
 
     @Override
-    public final IMessage onMessage(REQ message, MessageContext context) {
+    public final IMessage onMessage(T message, MessageContext context) {
         return message.handleMessage(context);
     }
 

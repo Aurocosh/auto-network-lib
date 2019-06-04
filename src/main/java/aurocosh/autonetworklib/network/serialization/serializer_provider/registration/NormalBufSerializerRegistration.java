@@ -13,6 +13,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
+import org.apache.commons.lang3.mutable.MutableInt;
 
 import javax.vecmath.Color3f;
 
