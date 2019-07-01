@@ -22,8 +22,7 @@ public class BufSerializerProvider {
     private static final Map<Class, GenericSerializerProvider> GENERIC_PROVIDERS = new HashMap<>();
 
     public static void preInit() {
-        if (WRITERS.isEmpty() && READERS.isEmpty())
-            MinecraftForge.EVENT_BUS.post(new BufSerializerRegistryEvent());
+        MinecraftForge.EVENT_BUS.post(new BufSerializerRegistryEvent());
     }
 
     public static <T> void registerWriter(Class<T> clazz, BufWriter<T> writer) {
