@@ -23,4 +23,8 @@ public abstract class WrappedClientMessage extends NetworkClientMessage implemen
     public void sendToAllAround(World world, BlockPos pos, int range) {
         getWrapper().sendToAllAround(this, new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), range));
     }
+
+    public void sendToAll() {
+        getWrapper().sendToAll(this);
+    }
 }
