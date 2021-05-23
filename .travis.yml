@@ -20,6 +20,8 @@ script:
   - ./gradlew build --info
   - ls ./build
 
+before_deploy: git fetch origin refs/notes/*:refs/notes/*
+
 deploy:
   provider: script
   script: ./gradlew publish curseforge
