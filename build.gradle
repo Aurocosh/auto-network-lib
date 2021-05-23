@@ -1,3 +1,5 @@
+import org.gradle.internal.os.OperatingSystem
+
 buildscript {
     repositories {
         jcenter()
@@ -28,6 +30,7 @@ repositories {
 }
 
 //logging.level = LogLevel.DEBUG
+def currentReleaseType = getReleaseType()
 version = "${mod_version}.${generateVersionCode()}"
 println version
 
@@ -74,9 +77,38 @@ static def generateVersionCode() {
     return result.toInteger()
 }
 
-static def getLastCommitMessage() {
-    def result = "git log --format=%B -n 1 HEAD".execute().text.trim() //unix
-    if(result.empty) throw new RuntimeException("Could not get last commit message? Cmd output: ${result.text}")
+static def getReleaseType() {
+    def tags = shExec("git notes show", true, true)
+    def isRelease = tags.contains('release')
+    (isRelease) ? "release" : "beta"
+}
+
+static def generateChangeLog(releaseType) {
+    def currentChange = shExec("git log --format=%B -n 1 HEAD")
+    if (releaseType == 'beta')
+        return currentChange
+
+    def logWithNotes = shExec("git log origin/master --format=%H_%N")
+    def matches = logWithNotes =~ '([0-9a-f]{5,40})_.*release'
+    def lastReleaseHash = matches[1][1]
+
+    def logFromPreviousBetas = shExec("git log --format=%s $lastReleaseHash..HEAD~1", true)
+    return "Last change:\n$currentChange\n\nChangelog from previous beta versions:\n$logFromPreviousBetas"
+}
+
+static def shExec(command, ignoreEmptyResult = false, ignoreErrors = false) {
+    if (OperatingSystem.current().isLinux())
+        command = command.replaceAll('"', '\\\\"')
+
+    def resultBuilder = '' << ''
+    def errorsBuilder = '' << ''
+    def task = command.execute()
+    task.waitForProcessOutput(resultBuilder, errorsBuilder)
+
+    def result = resultBuilder.toString().trim()
+    def errors = errorsBuilder.toString().trim()
+    if ((result.empty && !ignoreEmptyResult) || (!errors.empty && !ignoreErrors))
+        throw new RuntimeException("Could not execute command $command. Cmd output: $result. Errors: $errors")
     return result
 }
 
@@ -132,7 +164,7 @@ curseforge {
     apiKey = System.getenv('CURSEFORGE_API_KEY') ? System.getenv('CURSEFORGE_API_KEY') : ''
     project {
         id = curse_project_id
-        changelog = getLastCommitMessage()
-        releaseType = curse_release_type
+        changelog = generateChangeLog(currentReleaseType)
+        releaseType = currentReleaseType
     }
 }
