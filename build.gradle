@@ -16,11 +16,9 @@ buildscript {
 }
 
 plugins {
-    id "com.jfrog.bintray" version "1.8.4"
-    id 'com.matthewprenger.cursegradle' version '1.2.0'
+    id 'com.matthewprenger.cursegradle' version '1.4.0'
 }
 
-apply plugin: 'maven'
 apply plugin: 'maven-publish'
 apply plugin: 'java'
 apply plugin: 'net.minecraftforge.gradle.forge'
@@ -70,7 +68,8 @@ processResources
 }
 
 static def generateVersionCode() {
-    def result = "git rev-list 68b2f1c29aa3c5f27992437bf6db821958890077..HEAD --count".execute().text.trim() //unix
+    def commit_base = "68b2f1c29aa3c5f27992437bf6db821958890077"
+    def result = "git rev-list ${commit_base}..HEAD --count".execute().text.trim() //unix
     if(result.empty) throw new RuntimeException("Could not generate versioncode on this platform? Cmd output: ${result.text}")
     return result.toInteger()
 }
@@ -116,24 +115,15 @@ publishing {
             }
         }
     }
-}
 
-bintray {
-    user = System.getenv('BINTRAY_USER')
-    key = System.getenv('BINTRAY_API_KEY')
-    publications = ['maven']
-    pkg {
-        repo = 'Maven'
-        name = 'AutoNetworkLib'
-        licenses = ['LGPL-3.0']
-        vcsUrl = 'https://github.com/Aurocosh/auto-network-lib.git'
-        issueTrackerUrl = 'https://github.com/Aurocosh/auto-network-lib/issues'
-        publish = true
-        publicDownloadNumbers = true
-        version {
-            name = "AutoNetworkLib-${project.minecraft.version}-${project.version}"
-            desc = 'Auto network lib'
-            vcsTag = "${project.minecraft.version}-${project.version}"
+    def mavenVersion = mc_sub_version.replaceAll('\\.','-')
+    repositories {
+        maven {
+            url "https://repo.repsy.io/mvn/aurocosh/${mavenVersion}"
+            credentials {
+                username 'aurocosh'
+                password System.getenv('REPSY_PASSWORD')
+            }
         }
     }
 }
