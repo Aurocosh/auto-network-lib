@@ -148,10 +148,9 @@ publishing {
         }
     }
 
-    def mavenVersion = mc_sub_version.replaceAll('\\.','-')
     repositories {
         maven {
-            url "https://repo.repsy.io/mvn/aurocosh/${mavenVersion}"
+            url "https://repo.repsy.io/mvn/aurocosh/default"
             credentials {
                 username 'aurocosh'
                 password System.getenv('REPSY_PASSWORD')
