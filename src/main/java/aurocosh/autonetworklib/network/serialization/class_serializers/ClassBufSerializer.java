@@ -5,7 +5,7 @@ import aurocosh.autonetworklib.network.serialization.interfaces.BufReader;
 import aurocosh.autonetworklib.network.serialization.interfaces.BufWriter;
 import aurocosh.autonetworklib.network.serialization.serializer_provider.BufSerializerProvider;
 import aurocosh.autonetworklib.util.UtilReflection;
-import io.netty.buffer.ByteBuf;
+import net.minecraft.network.PacketBuffer;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.reflect.Field;
@@ -63,7 +63,7 @@ public class ClassBufSerializer {
         return types;
     }
 
-    public final void fromBytes(Object object, ByteBuf buf) {
+    public final void fromBytes(Object object, PacketBuffer buf) {
         try {
             for (FieldBufSerializer serializer : fieldBufSerializers)
                 serializer.deserialize(object, buf);
@@ -73,7 +73,7 @@ public class ClassBufSerializer {
         }
     }
 
-    public final void toBytes(Object object, ByteBuf buf) {
+    public final void toBytes(Object object, PacketBuffer buf) {
         try {
             for (FieldBufSerializer serializer : fieldBufSerializers)
                 serializer.serialize(object, buf);

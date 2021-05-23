@@ -4,8 +4,8 @@ import aurocosh.autonetworklib.AutoNetworkLib;
 import aurocosh.autonetworklib.network.serialization.buf_serializers.generic.array_list.CollectionSerializerProvider;
 import aurocosh.autonetworklib.network.serialization.buf_serializers.generic.hash_set.MapSerializerProvider;
 import aurocosh.autonetworklib.network.serialization.serializer_provider.BufSerializerProvider;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.*;
 

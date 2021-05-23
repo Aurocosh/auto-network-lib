@@ -24,9 +24,9 @@ before_deploy: git fetch origin refs/notes/*:refs/notes/*
 
 deploy:
   provider: script
-  script: ./gradlew publish curseforge
+  script: ./gradlew publish #curseforge
   skip_cleanup: true # to upload artifacts created during the build
   on:
     all_branches: true
-    condition: $TRAVIS_BRANCH =~ ^(1.12)$
-    #condition: $TRAVIS_BRANCH =~ ^(master|1.12)$
+    #condition: $TRAVIS_BRANCH =~ ^(1.12)$
+    condition: $TRAVIS_BRANCH =~ ^(master|1.12)$

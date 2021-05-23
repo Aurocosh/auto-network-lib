@@ -2,7 +2,7 @@ package aurocosh.autonetworklib.network.serialization.buf_serializers;
 
 import aurocosh.autonetworklib.network.serialization.interfaces.BufReader;
 import aurocosh.autonetworklib.network.serialization.interfaces.BufWriter;
-import io.netty.buffer.ByteBuf;
+import net.minecraft.network.PacketBuffer;
 
 public class EnumSerializer implements BufWriter<Enum>, BufReader<Enum> {
     private final Enum[] values;
@@ -12,12 +12,12 @@ public class EnumSerializer implements BufWriter<Enum>, BufReader<Enum> {
     }
 
     @Override
-    public void write(ByteBuf buf, Enum value) {
+    public void write(PacketBuffer buf, Enum value) {
         buf.writeInt(value.ordinal());
     }
 
     @Override
-    public Enum read(ByteBuf buf) {
+    public Enum read(PacketBuffer buf) {
         return values[buf.readInt()];
     }
 }

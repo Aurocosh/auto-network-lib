@@ -1,7 +1,7 @@
 package aurocosh.autonetworklib.network.serialization.buf_serializers.generic.array_list;
 
 import aurocosh.autonetworklib.network.serialization.interfaces.BufWriter;
-import io.netty.buffer.ByteBuf;
+import net.minecraft.network.PacketBuffer;
 
 import java.util.Collection;
 
@@ -12,7 +12,7 @@ public class CollectionListWriter<T extends Collection<Object>> implements BufWr
         this.writer = writer;
     }
 
-    public void write(ByteBuf buf, T values) {
+    public void write(PacketBuffer buf, T values) {
         buf.writeInt(values.size());
         if(values.isEmpty())
             return;

@@ -1,47 +1,66 @@
 package aurocosh.autonetworklib;
 
-import aurocosh.autonetworklib.proxy.CommonProxy;
+import aurocosh.autonetworklib.proxy.ClientProxy;
+import aurocosh.autonetworklib.proxy.ServerProxy;
+import aurocosh.autonetworklib.proxy.IProxy;
+import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.Mod.Instance;
-import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
+import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = AutoNetworkLib.MOD_ID, name = AutoNetworkLib.MOD_NAME, dependencies = AutoNetworkLib.DEPS)
+import java.util.stream.Collectors;
+
+@Mod(AutoNetworkLib.MOD_ID)
 public class AutoNetworkLib {
     // Mod Constants
     public final static String MOD_ID = "autonetworklib";
     public final static String MOD_NAME = "AutoNetworkLib";
-    public static final String DEPS = "required-after:forge@[14.23.5.2768,)";
 
-    // Proxy Constants
-    public final static String PROXY_COMMON = "aurocosh.autonetworklib.proxy.CommonProxy";
-    public final static String PROXY_CLIENT = "aurocosh.autonetworklib.proxy.ClientProxy";
-
-	@Instance(AutoNetworkLib.MOD_ID)
-	public static AutoNetworkLib instance;
-
-	@SidedProxy(serverSide = AutoNetworkLib.PROXY_COMMON, clientSide = AutoNetworkLib.PROXY_CLIENT)
-	public static CommonProxy proxy;
+    public static AutoNetworkLib instance;
+    public static IProxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
     public static Logger logger;
 
-	@EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
+    public AutoNetworkLib() {
+        instance = this;
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+    }
+
+    public void setup(FMLCommonSetupEvent event) {
+        this.preInit(event);
+        this.init(event);
+        this.postInit(event);
+    }
+
+    public void preInit(FMLCommonSetupEvent event) {
         logger = LogManager.getLogger();
-		proxy.preInit(event);
-	}
+        proxy.preInit(event);
+    }
 
-	@EventHandler
-	public void init(FMLInitializationEvent event) {
-		proxy.init(event);
-	}
+    public void init(FMLCommonSetupEvent event) {
+        proxy.init(event);
+    }
 
-	@EventHandler
-	public void postInit(FMLPostInitializationEvent event) {
-		proxy.postInit(event);
-	}
+    public void postInit(FMLCommonSetupEvent event) {
+        proxy.postInit(event);
+    }
+
+    private void enqueueIMC(final InterModEnqueueEvent event) {
+        // some example code to dispatch IMC to another mod
+        InterModComms.sendTo("examplemod", "helloworld", () -> {
+            logger.info("Hello world from the MDK");
+            return "Hello world";
+        });
+    }
+
+    private void processIMC(final InterModProcessEvent event) {
+        // some example code to receive and process InterModComms from other mods
+        logger.info("Got IMC {}", event.getIMCStream().
+                map(m -> m.getMessageSupplier().get()).
+                collect(Collectors.toList()));
+    }
 }

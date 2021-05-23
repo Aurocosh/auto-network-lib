@@ -1,7 +1,7 @@
 package aurocosh.autonetworklib.network.serialization.buf_serializers.array;
 
 import aurocosh.autonetworklib.network.serialization.interfaces.BufReader;
-import io.netty.buffer.ByteBuf;
+import net.minecraft.network.PacketBuffer;
 
 import java.lang.reflect.Array;
 
@@ -14,7 +14,7 @@ public class ArrayReader implements BufReader<Object> {
         this.reader = reader;
     }
 
-    public Object read(ByteBuf buf) {
+    public Object read(PacketBuffer buf) {
         int length = buf.readInt();
         Object array = Array.newInstance(componentClazz, length);
         if (length == 0)

@@ -1,8 +1,6 @@
 package aurocosh.autonetworklib.util;
 
 import aurocosh.autonetworklib.AutoNetworkLib;
-import net.minecraftforge.fml.common.FMLLog;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 import javax.annotation.Nonnull;
 import java.lang.invoke.MethodHandle;
@@ -21,8 +19,8 @@ public class UtilReflection {
             f.setAccessible(true);
             return f;
         }
-        catch (ReflectionHelper.UnableToAccessFieldException e) {
-            FMLLog.log.error("There was a problem getting field index {} from {}", fieldIndex, classToAccess.getName(), e);
+        catch (SecurityException e) {
+            AutoNetworkLib.logger.error("There was a problem getting field index {} from {}", fieldIndex, classToAccess.getName(), e);
             e.printStackTrace();
             return null;
         }

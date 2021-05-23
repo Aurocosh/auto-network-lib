@@ -1,34 +1,31 @@
 package aurocosh.autonetworklib.network.message;
-
 import aurocosh.autonetworklib.network.serialization.class_serializers.ClassBufSerializer;
-import io.netty.buffer.ByteBuf;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-
+import net.minecraft.network.PacketBuffer;
+import net.minecraftforge.fml.network.NetworkEvent;
 import java.util.HashMap;
+import java.util.function.Supplier;
 
-public abstract class NetworkAutoMessage<T extends NetworkAutoMessage> implements IMessage, IMessageHandler<T, IMessage> {
-    private static final HashMap<Class, ClassBufSerializer> serializers = new HashMap<>();
+public abstract class NetworkAutoMessage {
+    public static final HashMap<Class<? extends NetworkAutoMessage>, ClassBufSerializer> serializers = new HashMap<>();
 
-    @Override
-    public final void fromBytes(ByteBuf buf) {
-        Class clazz = getClass();
+    protected static <T extends NetworkAutoMessage> T loadFromBuffer(T message, PacketBuffer buf) {
+        Class<? extends NetworkAutoMessage> clazz = message.getClass();
         ClassBufSerializer serializer = serializers.computeIfAbsent(clazz, ClassBufSerializer::new);
-        serializer.fromBytes(this, buf);
+        serializer.fromBytes(message, buf);
+        return message;
     }
 
-    @Override
-    public final void toBytes(ByteBuf buf) {
-        Class clazz = getClass();
+    protected static void writeToBuffer(NetworkAutoMessage message, PacketBuffer buf) {
+        Class<? extends NetworkAutoMessage> clazz = message.getClass();
         ClassBufSerializer serializer = serializers.computeIfAbsent(clazz, ClassBufSerializer::new);
-        serializer.toBytes(this, buf);
+        serializer.toBytes(message, buf);
     }
 
-    @Override
-    public final IMessage onMessage(T message, MessageContext context) {
-        return message.handleMessage(context);
+    protected static void handleRawMessage(NetworkAutoMessage message, Supplier<NetworkEvent.Context> ctx) {
+        NetworkEvent.Context context = ctx.get();
+        context.enqueueWork(() -> message.handleMessage(context));
+        context.setPacketHandled(true);
     }
 
-    public abstract IMessage handleMessage(MessageContext context);
+    public abstract void handleMessage(NetworkEvent.Context context);
 }

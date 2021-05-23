@@ -4,7 +4,7 @@ import aurocosh.autonetworklib.network.serialization.interfaces.BufReader;
 import aurocosh.autonetworklib.network.serialization.interfaces.BufWriter;
 import aurocosh.autonetworklib.network.serialization.interfaces.GenericSerializerProvider;
 import aurocosh.autonetworklib.network.serialization.serializer_provider.BufSerializerProvider;
-import net.minecraftforge.fml.common.eventhandler.Event;
+import net.minecraftforge.eventbus.api.Event;
 
 public class BufSerializerRegistryEvent extends Event {
     public static <T> void registerWriter(Class<T> clazz, BufWriter<T> writer) {

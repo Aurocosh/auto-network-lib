@@ -1,8 +1,8 @@
 package aurocosh.autonetworklib.network.serialization.interfaces;
 
-import io.netty.buffer.ByteBuf;
+import net.minecraft.network.PacketBuffer;
 
 @FunctionalInterface
 public interface BufWriter<T> {
-    void write(ByteBuf buf, T value);
+    void write(PacketBuffer buf, T value);
 }

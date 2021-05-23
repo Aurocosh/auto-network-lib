@@ -2,7 +2,7 @@ package aurocosh.autonetworklib.network.serialization.class_serializers;
 
 import aurocosh.autonetworklib.network.serialization.interfaces.BufReader;
 import aurocosh.autonetworklib.network.serialization.interfaces.BufWriter;
-import io.netty.buffer.ByteBuf;
+import net.minecraft.network.PacketBuffer;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.reflect.Field;
@@ -28,11 +28,11 @@ public class FieldBufSerializer {
         return field;
     }
 
-    public void deserialize(Object object, ByteBuf buf) throws Throwable {
+    public void deserialize(Object object, PacketBuffer buf) throws Throwable {
         setter.invoke(object, reader.read(buf));
     }
 
-    public void serialize(Object object, ByteBuf buf) throws Throwable {
+    public void serialize(Object object, PacketBuffer buf) throws Throwable {
         Object invoke = getter.invoke(object);
         writer.write(buf, invoke);
     }

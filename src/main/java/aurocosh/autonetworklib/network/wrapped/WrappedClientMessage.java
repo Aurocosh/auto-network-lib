@@ -1,30 +1,34 @@
 package aurocosh.autonetworklib.network.wrapped;
 
-import aurocosh.autonetworklib.network.IWrapperProvider;
+import aurocosh.autonetworklib.network.ISimpleChannelProvider;
 import aurocosh.autonetworklib.network.message.NetworkClientMessage;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.network.PacketDistributor;
 
-public abstract class WrappedClientMessage extends NetworkClientMessage implements IWrapperProvider {
-    public void sendTo(EntityPlayer player) {
-        if (player instanceof EntityPlayerMP)
-            getWrapper().sendTo(this, (EntityPlayerMP) player);
+public abstract class WrappedClientMessage extends NetworkClientMessage implements ISimpleChannelProvider {
+    public void sendTo(PlayerEntity player) {
+        if (player instanceof ServerPlayerEntity) {
+            ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
+            getChannel().send(PacketDistributor.PLAYER.with(() -> serverPlayer), this);
+        }
     }
 
-    public void sendTo(EntityLivingBase player) {
-        if (player instanceof EntityPlayerMP)
-            getWrapper().sendTo(this, (EntityPlayerMP) player);
+    public void sendTo(LivingEntity player) {
+        if (player instanceof ServerPlayerEntity) {
+            ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
+            getChannel().send(PacketDistributor.PLAYER.with(() -> serverPlayer), this);
+        }
     }
 
     public void sendToAllAround(World world, BlockPos pos, int range) {
-        getWrapper().sendToAllAround(this, new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), range));
+        getChannel().send(PacketDistributor.ALL.noArg(), this);
     }
 
     public void sendToAll() {
-        getWrapper().sendToAll(this);
+        getChannel().send(PacketDistributor.ALL.noArg(), this);
     }
 }

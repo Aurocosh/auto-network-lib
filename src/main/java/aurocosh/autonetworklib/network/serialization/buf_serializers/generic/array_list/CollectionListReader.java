@@ -2,7 +2,7 @@ package aurocosh.autonetworklib.network.serialization.buf_serializers.generic.ar
 
 import aurocosh.autonetworklib.network.serialization.interfaces.BufReader;
 import aurocosh.autonetworklib.network.serialization.interfaces.ContainerGenerator;
-import io.netty.buffer.ByteBuf;
+import net.minecraft.network.PacketBuffer;
 
 import java.util.Collection;
 
@@ -15,7 +15,7 @@ public class CollectionListReader<T extends Collection<Object>> implements BufRe
         this.containerGenerator = containerGenerator;
     }
 
-    public T read(ByteBuf buf) {
+    public T read(PacketBuffer buf) {
         int length = buf.readInt();
         if (length == 0)
             return containerGenerator.get(0);
