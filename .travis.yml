@@ -25,4 +25,7 @@ deploy:
   script: ./gradlew publish curseforge
   skip_cleanup: true # to upload artifacts created during the build
   on:
-    branch: master
+    branches:
+      only:
+        - master
+        - 1.12
